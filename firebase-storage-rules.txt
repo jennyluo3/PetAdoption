@@ -1,0 +1,29 @@
+# Firebase Storage Rules for Pet Adoption App
+# Copy these rules to your Firebase Console > Storage > Rules
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow read access to all files
+    match /{allPaths=**} {
+      allow read: if true;
+    }
+    
+    // Allow write access to authenticated users for pet images
+    match /pets/{fileName} {
+      allow write: if true; // For now, allow all writes (you can restrict this later)
+    }
+    
+    // Allow write access to other paths if needed
+    match /{allPaths=**} {
+      allow write: if true; // For now, allow all writes (you can restrict this later)
+    }
+  }
+}
+
+# Instructions:
+# 1. Go to Firebase Console (https://console.firebase.google.com)
+# 2. Select your project: petadoption-b6aaf
+# 3. Go to Storage > Rules
+# 4. Replace the existing rules with the rules above
+# 5. Click "Publish"
